@@ -56,7 +56,7 @@ function ProductScreen() {
   ) : (
     <div>
       <Row>
-        <Col md={6}>
+        <Col md={5}>
           <img
             className="img-large"
             src={product.image}
@@ -64,7 +64,7 @@ function ProductScreen() {
           ></img>
         </Col>
 
-        <Col md={3}>
+        <Col md={4}>
           <ListGroup variant="flush">
             <ListGroup.Item>
               <Helmet>
@@ -79,9 +79,45 @@ function ProductScreen() {
                 numReviews={product.numReviews}
               ></Rating>
             </ListGroup.Item>
-            <ListGroup.Item>Price : $ {product.price}</ListGroup.Item>
+
             <ListGroup.Item>
-              Description: <p>{product.description}</p>
+              <b>Brand:</b> <p>{product.brand}</p>
+            </ListGroup.Item>
+
+            <ListGroup.Item>
+              <b>Description:</b> <p>{product.description}</p>
+            </ListGroup.Item>
+
+            <ListGroup.Item>
+              <b>Condition:</b> <p>{product.condition}</p>
+            </ListGroup.Item>
+
+            <ListGroup.Item>
+              <Row>
+                <Col>
+                  <b>height:</b> <p>{product.height}</p>
+                </Col>
+                <Col>
+                  <b>width:</b> <p>{product.width}</p>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <b>Material: </b>
+                  <p>{product.material}</p>
+                </Col>
+                <Col>
+                  <b>Size:</b> <p>{product.size}</p>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <b>Colour:</b> <p>{product.colour}</p>
+                </Col>
+                <Col>
+                  <b>Total Weight:</b> <p>{product.totalweight}</p>
+                </Col>
+              </Row>
             </ListGroup.Item>
           </ListGroup>
         </Col>
