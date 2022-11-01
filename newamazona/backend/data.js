@@ -14,7 +14,7 @@ const data = {
       totalweight: '26.9',
       gender: 'Women',
       condition: 'Good condition, used with some signs of wear',
-      countInStock: 1,
+      countInStock: 0,
       brand: 'Hermès',
       rating: 4.5,
       numReviews: 10,
