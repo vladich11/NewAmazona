@@ -1,6 +1,7 @@
 const data = {
   products: [
     {
+      _id: '1',
       name: 'Hermès - Bracelet',
       slug: 'Hermès-bracelet',
       category: 'Bracelet',
@@ -14,7 +15,7 @@ const data = {
       totalweight: '26.9',
       gender: 'Women',
       condition: 'Good condition, used with some signs of wear',
-      countInStock: 1,
+      countInStock: 3,
       brand: 'Hermès',
       rating: 4.5,
       numReviews: 10,
@@ -22,6 +23,7 @@ const data = {
         'Hermes goldtone enamel bangle bracelet narrow bracelet with ornaments and gold stripes on the sides very good condition inner diameter 6.5 cm material - metal enamel',
     },
     {
+      _id: '2',
       name: 'Hermès - Bracelet',
       slug: 'Hermès-Leather-bracelet',
       category: 'Bracelet',
@@ -43,6 +45,7 @@ const data = {
         'Hermes double leather bracelet in a good condition full length 38cm color brown silver real leather material metal',
     },
     {
+      _id: '3',
       name: 'Tiffany - 925 Silver- Bracelet',
       slug: 'Tiffany-silver-bracelet',
       category: 'Bracelet',
@@ -64,6 +67,7 @@ const data = {
         'Tiffany - narrow silver bracelet 1837 in a good condition inner diameter 5.5 cm weight 33.7 gr engraved 1997 Tiffany Co 925',
     },
     {
+      _id: '4',
       name: 'Tiffany - 925 Silver - Bracelet',
       slug: 'Tiffany-Atlas-silver-bracelet',
       category: 'Bracelet',
@@ -85,6 +89,7 @@ const data = {
         'Tiffany bracelet 925 Silver "Atlas" in a good condition. material silver 925 engraved by Tiffany Co. 1995',
     },
     {
+      _id: '5',
       name: 'Tiffany - Gold - Bracelet',
       slug: 'Tiffany-silver-bracelet-2',
       category: 'Bracelet',
@@ -106,6 +111,7 @@ const data = {
         'Tiffany - bracelet with hearts and stars  material gold 750 bracelet length - 17/5 cm weight -17.7 grams In a very good condition',
     },
     {
+      _id: '6',
       name: 'Tiffany - Silver - Bracelet',
       slug: 'Tiffany-bracelet',
       category: 'Bracelet',
