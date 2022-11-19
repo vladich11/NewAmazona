@@ -6,8 +6,9 @@ import Badge from 'react-bootstrap/Badge';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Store } from './screens/Store';
+import { Store } from './Store';
 import { useContext } from 'react';
+import CartScreen from './screens/CartScreen';
 
 function App() {
   // Get context
@@ -40,6 +41,7 @@ function App() {
           <Container className="mt-4">
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
+              <Route path="/cart" element={<CartScreen />} />
               <Route path="/" element={<HomeScreen />} />
             </Routes>
           </Container>
