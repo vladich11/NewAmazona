@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useContext, useEffect, useReducer } from 'react';
+import { useContext, useEffect, useReducer, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -29,6 +29,7 @@ const reducer = (state, action) => {
 };
 
 function ProductScreen() {
+  const [selectedImage, setSelectedImage] = useState('');
   const navigate = useNavigate();
   const params = useParams();
   const { slug } = params;
@@ -85,9 +86,28 @@ function ProductScreen() {
         <Col md={5}>
           <img
             className="img-large"
-            src={product.image}
+            src={selectedImage || product.image}
             alt={product.name}
           ></img>
+          &nbsp;
+          <ListGroup.Item>
+            <Row xs={1} md={3} className="g-2">
+              {[product.image, ...product.images].map((x) => (
+                <Col key={x}>
+                  <Card>
+                    <Button
+                      className="thumbnail"
+                      type="button"
+                      variant="light"
+                      onClick={() => setSelectedImage(x)}
+                    >
+                      <Card.Img variant="top" src={x} alt="product" />
+                    </Button>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </ListGroup.Item>
         </Col>
 
         <Col md={4}>
@@ -165,6 +185,7 @@ function ProductScreen() {
                     <Col>${product.price}</Col>
                   </Row>
                 </ListGroup.Item>
+
                 <ListGroup.Item>
                   <Row>
                     <Col>Status:</Col>
