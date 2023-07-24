@@ -15,6 +15,11 @@ import { Store } from '../Store';
 import { getError } from '../utils';
 import { toast } from 'react-toastify';
 
+// A reducer in Redux is a pure function that takes in the current state and an action, and returns a new state.
+// It specifies how the state of an application should change in response to an action.
+// The role of a reducer is to specify how the state of the application should change in response to an action, and to provide the new state after the change.
+// The returned state becomes the new state for the store, which is then passed on to all connected components.
+
 function reducer(state, action) {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -77,6 +82,11 @@ export default function OrderScreen() {
 
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
+  // This function creates a new order in the system by calling the actions.order.create()
+  // method with the required purchase_units data.
+  // The purchase_units information includes the total amount of the order.
+  // The function returns a Promise that resolves to the ID of the newly created order.
+
   function createOrder(data, actions) {
     return actions.order
       .create({
@@ -90,6 +100,11 @@ export default function OrderScreen() {
         return orderID;
       });
   }
+
+  // This function onApprove is a callback function that is triggered when a customer approves an order. It first captures the order details using actions.order.capture(),
+  // then dispatches a PAY_REQUEST action, and makes a PUT request to the server to update the order status to paid. If the request is successful,
+  // it dispatches a PAY_SUCCESS action with the updated order data, and displays a success message using toast.success().
+  // If the request fails, it dispatches a PAY_FAIL action with the error message and displays an error message using toast.error()
 
   function onApprove(data, actions) {
     return actions.order.capture().then(async function (details) {
@@ -110,9 +125,24 @@ export default function OrderScreen() {
       }
     });
   }
+
   function onError(err) {
     toast.error(getError(err));
   }
+
+  // useEffect to fetch an order and perform some related actions.
+
+  // In the fetchOrder function, an order is fetched from the server using the orderId parameter and the axios library. If the fetch is successful,
+  // the FETCH_SUCCESS action is dispatched with the fetched data as its payload. In case of an error,
+  // the FETCH_FAIL action is dispatched with an error message obtained from the getError function.
+
+  // If userInfo is not present, the user is redirected to the login page. If either successPay or successDeliver is true,
+  //  or if order._id is different from orderId, the fetchOrder function is called. In case of successPay,
+  //  the PAY_RESET action is dispatched and in case of successDeliver, the DELIVER_RESET action is dispatched.
+
+  // In the else block, the loadPaypalScript function is called, which loads the Paypal script using the paypalDispatch method.
+  // It first fetches the client id from the server using the axios library and the /api/keys/paypal endpoint.
+  // This client id is then passed to the Paypal script using the paypalDispatch method.
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -168,6 +198,11 @@ export default function OrderScreen() {
     successPay,
     successDeliver,
   ]);
+
+  // This is an async function deliverOrderHandler which dispatches an action of type DELIVER_REQUEST to trigger an update to the delivery status of an order.
+  // The function makes a PUT request to the /api/orders/${order._id}/deliver endpoint, passing the required headers to authorize the request. If the request is successful,
+  // it dispatches an action of type DELIVER_SUCCESS and shows a success toast message.
+  // If there is an error, it dispatches an action of type DELIVER_FAIL and shows an error toast message using the getError function.
 
   async function deliverOrderHandler() {
     try {

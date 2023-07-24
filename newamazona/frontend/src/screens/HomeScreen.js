@@ -8,10 +8,16 @@ import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
+// This is a reducer function that updates the state based on the dispatched action. It takes the current state and the action as inputs and returns a new state.
+// The function has 4 cases:
+// FETCH_REQUEST: when fetching data, the state is updated with loading: true.
+// FETCH_SUCCESS: when data is successfully fetched, the state is updated with products: action.payload and loading: false.
+// FETCH_FAIL: when fetching data fails, the state is updated with loading: false and error: action.payload.
+// default: when no case is met, the original state is returned.
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
-      //keep the previous values and only update loading to true
       return { ...state, loading: true };
     case 'FETCH_SUCCESS':
       return { ...state, products: action.payload, loading: false };
@@ -23,18 +29,28 @@ const reducer = (state, action) => {
 };
 
 function HomeScreen() {
-  // useReducer hook
+  // initializes the state object with loading set to true,
+  // error set to an empty string, and products set to an empty array using useReducer hook.
+  // useReducer hook takes in the reducer function as the first argument and an initial state object as
+  // the second argument. The hook returns an array with the current state as the first element and a
+  // dispatch function used to dispatch actions to the reducer as the second element. The state is passed through
+  // the logger higher-order function before being passed to the useReducer hook.
+
   const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
     products: [],
     loading: true,
     error: '',
   });
-  // A hook to get data
+
+  //  initializes the state object with loading set to true, error set to an empty string, and products set to an empty array using useReducer hook.
+  //  useReducer hook takes in the reducer function as the first argument and an initial state object as the second argument.
+  //  The hook returns an array with the current state as the first element and a dispatch function used to dispatch actions to the reducer as the second element.
+  //  The state is passed through the logger higher-order function before being passed to the useReducer hook.
+
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST', loading: true });
       try {
-        //ajax req
         const result = await axios.get('api/products');
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
       } catch (err) {

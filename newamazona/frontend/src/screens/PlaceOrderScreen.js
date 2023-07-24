@@ -13,6 +13,11 @@ import { Store } from '../Store';
 import CheckoutSteps from '../components/CheckoutSteps';
 import LoadingBox from '../components/LoadingBox';
 
+// A reducer in Redux is a pure function that takes in the current state and an action, and returns a new state.
+// It specifies how the state of an application should change in response to an action.
+// The role of a reducer is to specify how the state of the application should change in response to an action, and to provide the new state after the change.
+// The returned state becomes the new state for the store, which is then passed on to all connected components.
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'CREATE_REQUEST':
@@ -40,9 +45,17 @@ export default function PlaceOrderScreen() {
   cart.itemsPrice = round2(
     cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
   );
+
   cart.shippingPrice = cart.itemsPrice > 100 ? round2(0) : round2(10);
   cart.taxPrice = round2(0.15 * cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
+
+  //  placeOrderHandler is executed when the user places an order.
+  //  It dispatches an action with the type 'CREATE_REQUEST' to inform the state that the process of creating an order has started.
+  //  Then, it sends a POST request to the API endpoint "/api/orders" with the data of the order,
+  //  including the order items, shipping address, payment method, prices, etc. The response data, which is the created order,
+  //  is then used to clear the cart and store the success status of the order creation process.
+  //  If there is an error in the process, the dispatch action with the type 'CREATE_FAIL' is sent, and a toast error message with the error details is displayed.
 
   const placeOrderHandler = async () => {
     try {

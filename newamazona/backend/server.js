@@ -30,7 +30,7 @@ app.get('/api/keys/paypal', (req, res) => {
 });
 
 app.use('/api/upload', uploadRouter);
-// Seed products in mogodb
+// Seed products in mongodb
 app.use('/api/seed', seedRouter);
 app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);

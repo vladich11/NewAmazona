@@ -8,6 +8,14 @@ import { Store } from '../Store';
 import { getError } from '../utils';
 import Button from 'react-bootstrap/esm/Button';
 
+// This code implements a reducer function for handling actions related to fetching order data. The function takes the current state and an action as its arguments, and returns the updated state based on the type of the action.
+// The possible actions are:
+// FETCH_REQUEST: the request for fetching order data has been made, so the loading property is set to true.
+// FETCH_SUCCESS: the fetch was successful, and the order data is stored in the payload property of the action. The loading property is set to false, and the orders property of the state is set to the order data.
+// FETCH_FAIL: the fetch failed, and an error message is stored in the payload property of the action. The loading property is set to false, and the error property of the state is set to the error message.
+// default: the action type is not recognized, so the original state is returned without changes.
+// The state returned by the reducer function contains properties for the loading status, the order data, and an error message (if any).
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -30,6 +38,14 @@ export default function OrderHistoryScreen() {
     loading: true,
     error: '',
   });
+
+  // useEffect hook to fetch order data for the current user.
+  // The fetchData function is an async function that sends a GET request to the /api/orders/mine endpoint with an authorization header that contains the user's token.
+  //  If the request is successful, the dispatch function is called with the FETCH_SUCCESS action type and the payload of the response data. If there is an error,
+  //  the dispatch function is called with the FETCH_FAIL action type and the error message obtained from the getError function.
+  //  The useEffect hook is called with the userInfo dependency,
+  //  so it will re-run whenever the userInfo object changes.
+
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });

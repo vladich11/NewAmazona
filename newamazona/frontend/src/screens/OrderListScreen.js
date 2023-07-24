@@ -9,6 +9,11 @@ import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
 import { getError } from '../utils';
 
+// This is a reducer function that updates the state object based on the action type. It has cases for different actions such as fetch request,
+// fetch success, fetch fail, delete request, delete success, delete fail, and delete reset.
+//  Each case updates the state object with new values for various properties such as loading,error, successDelete,
+//  orders, etc. This allows for maintaining the consistency of the state throughout the application.
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -47,6 +52,13 @@ export default function OrderListScreen() {
       error: '',
     });
 
+  // useEffect hook to fetch order data from an API.
+  // The hook dispatches an action of type FETCH_REQUEST to indicate the start of the fetch,
+  // and dispatches either FETCH_SUCCESS with the fetched data as payload, or FETCH_FAIL with the error message, in case of an unsuccessful fetch.
+
+  // The hook is triggered whenever the userInfo or successDelete values change.
+  // If successDelete is true, the hook dispatches an action of type DELETE_RESET to reset the state,
+  // otherwise it calls fetchData to start the fetch.
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -68,6 +80,11 @@ export default function OrderListScreen() {
       fetchData();
     }
   }, [userInfo, successDelete]);
+
+  // the deleteHandler function is used to delete an order.
+  // The function dispatches an action of type DELETE_REQUEST before starting the deletion and dispatches either
+  // DELETE_SUCCESS in case of a successful deletion or DELETE_FAIL in case of a failure.
+  // The function also shows success or error notifications using the toast library.
 
   const deleteHandler = async (order) => {
     if (window.confirm('Are you sure to delete?')) {

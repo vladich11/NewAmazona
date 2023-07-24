@@ -70,6 +70,10 @@ export default function ProductEditScreen() {
   const [gender, setGender] = useState('');
   const [totalweight, setTotalweight] = useState('');
 
+  // The useEffect hook to fetch product details from the API when the component is mounted (i.e., when the productId value changes).
+  // The product details are then set in the local state using the setName, setSlug, setPrice, and other set functions. The fetch request is dispatched with the action FETCH_REQUEST,
+  //  and if it succeeds, the action FETCH_SUCCESS is dispatched. In case of an error, the action FETCH_FAIL is dispatched with the error message as the payload.
+  
   useEffect(() => {
     const fetchData = async () => {
       try {

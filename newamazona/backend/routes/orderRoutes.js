@@ -7,7 +7,7 @@ import { isAuth, isAdmin } from '../utils.js';
 
 const orderRouter = express.Router();
 
-//Get orders
+//Get orders admin
 orderRouter.get(
   '/',
   isAuth,
@@ -84,6 +84,7 @@ orderRouter.get(
   })
 );
 
+//Get all user orders
 orderRouter.get(
   '/mine',
   isAuth,
@@ -93,6 +94,7 @@ orderRouter.get(
   })
 );
 
+//Find order by id
 orderRouter.get(
   '/:id',
   isAuth,

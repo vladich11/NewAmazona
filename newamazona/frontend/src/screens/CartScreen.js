@@ -11,11 +11,23 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function CartScreen() {
+  // Retrieving the 'useNavigate' hook from the '@reach/router' library
+  // to enable navigation in the component.
+
   const navigate = useNavigate();
+
+  //  Destructuring the state and dispatch values from the Store context
+  //  using the useContext hook and renaming the dispatch value to ctxDispatch for readability purposes.
+
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
   } = state;
+
+  // updateCartHandler function that asynchronously adds an item to the cart
+  // by making a GET request to the /api/products endpoint to retrieve product data
+  // and verifying if the product is in stock. If in stock, dispatches a 'CART_ADD_ITEM' action
+  // to the Store context with the item data and the specified quantity.
 
   const updateCartHandler = async (item, quantity) => {
     const { data } = await axios.get(`/api/products/${item._id}`);
@@ -28,9 +40,14 @@ export default function CartScreen() {
       payload: { ...item, quantity },
     });
   };
+  // removeItemHandler function that dispatches a 'CART_REMOVE_ITEM' action
+  // to the Store context with the item data to remove it from the cart.
   const removeItemHandler = (item) => {
     ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   };
+
+  // checkoutHandler: function to handle the checkout process.
+  // It navigates the user to the sign-in page with a redirect URL to the shipping page.
 
   const checkoutHandler = () => {
     navigate('/signin?redirect=/shipping');

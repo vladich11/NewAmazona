@@ -17,6 +17,11 @@ export default function PaymentMethodScreen() {
     paymentMethod || 'PayPal'
   );
 
+  // This is a React Hook (useEffect) that runs when the component is mounted. If the shippingAddress.address is not set, it redirects the user to the /shipping page.
+  // It also defines a submitHandler function that is triggered when the form is submitted.
+  // The function prevents the default form behavior, dispatches a Redux action (SAVE_PAYMENT_METHOD) to update the state with the selected payment method,
+  // and saves the payment method to the local storage. Finally, it redirects the user to the /placeorder page.
+
   useEffect(() => {
     if (!shippingAddress.address) {
       navigate('/shipping');
@@ -28,6 +33,7 @@ export default function PaymentMethodScreen() {
     localStorage.setItem('paymentMethod', paymentMethodName);
     navigate('/placeorder');
   };
+
   return (
     <div>
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
